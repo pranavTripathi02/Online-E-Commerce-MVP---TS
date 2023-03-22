@@ -1,15 +1,22 @@
 import { FilterType, ProductType } from '../types';
 import { useAppSelector } from '../hooks';
-import { filterTitle } from '../utils/filters';
+import { filterReviews, filterTitle } from '../utils/filters';
 import ProductCard from '../components/ProductCard';
+import { useEffect } from 'react';
 
 export default function Products() {
   const productList: ProductType[] = useAppSelector((state) => state.products);
   const filterList: FilterType = useAppSelector((state) => state.filters);
+
   let filteredProducts: ProductType[] = filterTitle(
     productList,
     filterList.title
   );
+  filteredProducts = filterReviews(productList, filterList.review);
+  useEffect(() => {
+    filteredProducts = filterTitle(productList, filterList.title);
+    filteredProducts = filterReviews(productList, filterList.review);
+  }, [filterList]);
 
   return (
     <div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-auto lg:ml-8'>

@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import Logo from '../assets/Logo1.png';
-import { addFilter } from '../reducer/features/filters/filterSlice';
+import { updateFilter } from '../reducer/features/filters/filterSlice';
 import { useAppDispatch } from '../hooks';
 // import logo from '../assets/react.svg';
 
 export default function Navbar() {
   const [searchVal, setSearchVal] = useState('');
   const dispatch = useAppDispatch();
-  const searchChange = (val: string) => {
-    setSearchVal(val);
-    dispatch(addFilter({ key: 'title', value: val }));
-  };
+  React.useEffect(() => {
+    const delaySearch = setTimeout(() => {
+      dispatch(
+        updateFilter({ filter: 'search', key: 'title', value: searchVal })
+      );
+
+      return () => {
+        clearTimeout(delaySearch);
+      };
+    }, 2000);
+  }, [searchVal]);
 
   return (
     <nav>
@@ -24,10 +31,15 @@ export default function Navbar() {
             // ref={searchVal}
             value={searchVal}
             // className='p-2 rounded-lg w-1/2'
-            className='relative flex-auto bg-transparent border rounded-l border-solid focus:border-neutral-300 border-neutral-400 px-3 py-1.5 text-base transition duration-300 ease-in-out focus:text-neutral-200 focus:shadow-te-primary focus:outline-none text-neutral-400 placeholder:text-neutral-400'
-            onChange={(e) => searchChange(e.target.value)}
+            className='relative flex-auto bg-transparent border rounded-l border-r-0 border-solid focus:border-neutral-300 border-neutral-400 px-3 py-1.5 text-base transition duration-300 ease-in-out focus:text-neutral-200 focus:shadow-te-primary focus:outline-none text-neutral-400 placeholder:text-neutral-400'
+            onChange={(e) => setSearchVal(e.target.value)}
           />
-          <button className='relative border px-2 py-2.5 text-neutral-300 hover:text-neutral-200 rounded-r border-neutral-400 hover:border-neutral-300 bg-amber-900 transition duration-300 ease-in-out fa-solid fa-magnifying-glass' />
+          <button
+            className={`relative border px-3 py-2.5 text-neutral-300 hover:text-neutral-200 rounded-r border-neutral-400 hover:border-neutral-300 bg-amber-900 transition duration-300 ease-in-out w-11 fa-solid ${
+              searchVal.length < 1 ? 'fa-magnifying-glass' : 'fa-xmark'
+            }`}
+            onClick={() => setSearchVal('')}
+          />
         </div>
         <div className='py-2 px-3'>🛒</div>
       </div>

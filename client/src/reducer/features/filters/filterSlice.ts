@@ -1,4 +1,4 @@
-import { bindActionCreators, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { FilterType } from '../../../types';
 
 const initialState: FilterType = {
@@ -13,22 +13,22 @@ const filterSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    addFilter: (state, action) => {
+    updateFilter: (state, action) => {
       const { key, value }: { key: string; value: string } = action.payload;
-      state = { ...state, [key]: value };
-      return state;
+      return { ...state, [key]: value };
     },
     removeFilter: (state, action) => {
       const { key }: { key: string } = action.payload;
-      state = { ...state, [key]: null };
-      return state;
+      // state = { ...state, [key]: null };
+      return { ...state, [key]: null };
+      // return state;
     },
     clearAll: (state) => {
-      state = {};
-      return state;
+      state = initialState;
+      // return state;
     },
   },
 });
 
-export const { addFilter, removeFilter, clearAll } = filterSlice.actions;
+export const { updateFilter, removeFilter, clearAll } = filterSlice.actions;
 export default filterSlice.reducer;

@@ -43,3 +43,20 @@
 .read-the-docs {
   color: #888;
 } */
+
+.stars-1:after {
+  content: '\f005'; /* 2 Stars */
+  font-family: FontAwesome;
+}
+.stars-2:after {
+  content: '\f005\f005'; /* 2 Stars */
+  font-family: FontAwesome;
+}
+.stars-3:after {
+  content: '\f005\f005\f005'; /* 3 Stars */
+  font-family: FontAwesome;
+}
+.stars-4:after {
+  content: '\f005\f005\f005\f005'; /* 4 Stars */
+  font-family: FontAwesome;
+}

@@ -9,7 +9,7 @@ export interface FilterType {
 export interface ProductType {
   title: string;
   selling_price: string;
-  product_rating?: 1 | 2 | 3 | 4 | 5;
+  product_rating?: number;
   image_links: string;
   category_1: string;
   mrp: string;
