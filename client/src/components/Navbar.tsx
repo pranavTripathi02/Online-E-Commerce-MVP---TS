@@ -9,9 +9,7 @@ export default function Navbar() {
   const dispatch = useAppDispatch();
   React.useEffect(() => {
     const delaySearch = setTimeout(() => {
-      dispatch(
-        updateFilter({ filter: 'search', key: 'title', value: searchVal })
-      );
+      dispatch(updateFilter({ key: 'title', value: searchVal }));
 
       return () => {
         clearTimeout(delaySearch);

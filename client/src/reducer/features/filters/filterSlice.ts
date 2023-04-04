@@ -4,8 +4,7 @@ import { FilterType } from '../../../types';
 const initialState: FilterType = {
   title: null,
   seller: null,
-  price_low: null,
-  price_high: null,
+  price: null,
   review: null,
 };
 

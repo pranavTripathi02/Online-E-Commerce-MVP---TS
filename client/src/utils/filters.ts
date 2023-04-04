@@ -1,33 +1,28 @@
-import { ProductType } from '../types';
+import { FilterType, ProductType } from '../types';
 
-// export default filterProducts = (array: any) => {
-export const filterTitle = (array: any, title: string | undefined | null) => {
-  if (title)
-    return array.filter((item: ProductType) =>
-      item.title.toLowerCase().includes(title.toLowerCase())
-    );
-  else return array;
+const filterTitle = (array: any, title: string) => {
+  return array.filter((item: ProductType) =>
+    item.title.toLowerCase().includes(title.toLowerCase())
+  );
 };
-export const filterReviews = (
-  array: any,
-  review: number | undefined | null
-) => {
-  if (review !== undefined && review !== null)
-    return array.filter((item: ProductType) => {
-      if (item.product_rating) return item.product_rating >= review;
-    });
-  else return array;
+
+const filterReviews = (array: any, review: number) => {
+  return array.filter((item: ProductType) => {
+    if (item.product_rating) return item.product_rating >= review;
+  });
 };
-// };
 
-// export const filterTitle = (array, title) => {
-//   return array.filter((item) => item.title === title);
-// };
+const filterPrice = (array: any, price: { min: number; max: number }) => {
+  return array.filter(
+    (item: ProductType) =>
+      parseInt(item.selling_price.slice(1)) >= price.min &&
+      parseInt(item.selling_price.slice(1)) <= price.max
+  );
+};
 
-// export const filterTitle = (array, title) => {
-//   return array.filter((item) => item.title === title);
-// };
-
-// export const filterTitle = (array, title) => {
-//   return array.filter((item) => item.title === title);
-// };
+export default (array: any, filterList: FilterType) => {
+  if (filterList.title) array = filterTitle(array, filterList.title);
+  if (filterList.review) array = filterReviews(array, filterList.review);
+  if (filterList.price) array = filterPrice(array, filterList.price);
+  return array;
+};

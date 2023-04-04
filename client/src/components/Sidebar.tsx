@@ -4,11 +4,16 @@ import { updateFilter } from '../reducer/features/filters/filterSlice';
 
 export default function Sidebar() {
   const [stars, setStars] = useState(0);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(10000);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(updateFilter({ key: 'review', value: stars }));
-  }, [stars]);
+    dispatch(
+      updateFilter({ key: 'price', value: { min: minPrice, max: maxPrice } })
+    );
+  }, [stars, maxPrice, minPrice]);
 
   return (
     <div className='my-5 mx-2 h-1/2 w-1/6 bg-transparent float-left hidden lg:flex flex-col text-center'>
@@ -25,8 +30,51 @@ export default function Sidebar() {
           })}
         </ul>
       </div>
-      <div className='bg-white shadow-md my-2 border'>Price</div>
-      <div className='bg-white shadow-md my-2 border'>Seller</div>
+      <div className='bg-white shadow-md my-2 border w-full'>
+        <h5>Price</h5>
+        <div className='flex items-center'>
+          <input
+            placeholder='min'
+            type='number'
+            min={0}
+            name='minPrice'
+            className='w-1/4 m-auto my-2 text-left [-moz-appearance:textfield]'
+            value={minPrice}
+            onChange={(e) => setMinPrice(parseInt(e.target.value))}
+          />
+          <span>-</span>
+          <input
+            placeholder='max'
+            type='number'
+            min={0}
+            name='maxPrice'
+            className='w-1/4 m-auto my-2 text-right [-moz-appearance:textfield]'
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(parseInt(e.target.value))}
+          />
+        </div>
+        <div className='price-slider relative h-[20px]'>
+          <input
+            className='absolute [-moz-appearance:none] [-webkit-appearance:none] pointer-events-none bg-none w-full h-[5px] left-0'
+            type='range'
+            value={minPrice}
+            min={0}
+            max={10000}
+            onChange={(e) => setMinPrice(parseInt(e.target.value))}
+          />
+          <input
+            className='absolute [-moz-appearance:none] [-webkit-appearance:none] pointer-events-none bg-none w-full h-[5px] left-0'
+            type='range'
+            value={maxPrice}
+            min={0}
+            max={10000}
+            onChange={(e) => setMaxPrice(parseInt(e.target.value))}
+          />
+        </div>
+      </div>
+      <div className='bg-white shadow-md my-2 border'>
+        <h5>Seller</h5>
+      </div>
     </div>
   );
 }

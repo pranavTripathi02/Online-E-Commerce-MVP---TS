@@ -1,8 +1,7 @@
 export interface FilterType {
   title?: string | null;
   seller?: string | null;
-  price_low?: number | null;
-  price_high?: number | null;
+  price?: { min: number; max: number } | null;
   review?: number | null;
 }
 
