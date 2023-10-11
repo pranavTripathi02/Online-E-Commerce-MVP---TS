@@ -5,18 +5,15 @@ import Products from './pages/Products';
 import './App.css';
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <div className='px-2'>
-        <Sidebar />
-      </div>
-      <div className='flex flex-col px-2'>
-        <Products />
-      </div>
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <main className='relative z-0 '>
+                <Navbar />
+                <Sidebar />
+                <Products />
+            </main>
+        </>
+    );
 }
 
 export default App;

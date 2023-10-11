@@ -2,45 +2,77 @@ import React, { useState } from 'react';
 import Logo from '../assets/Logo1.png';
 import { updateFilter } from '../reducer/features/filters/filterSlice';
 import { useAppDispatch } from '../hooks';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping, faCircleHalfStroke, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 // import logo from '../assets/react.svg';
 
 export default function Navbar() {
-  const [searchVal, setSearchVal] = useState('');
-  const dispatch = useAppDispatch();
-  React.useEffect(() => {
-    const delaySearch = setTimeout(() => {
-      dispatch(updateFilter({ key: 'title', value: searchVal }));
+    const [searchVal, setSearchVal] = useState('');
+    const dispatch = useAppDispatch();
+    React.useEffect(() => {
+        const delaySearch = setTimeout(() => {
+            dispatch(updateFilter({ key: 'title', value: searchVal }));
 
-      return () => {
-        clearTimeout(delaySearch);
-      };
-    }, 2000);
-  }, [searchVal]);
+            return () => {
+                clearTimeout(delaySearch);
+            };
+        }, 2000);
+    }, [searchVal]);
 
-  return (
-    <nav>
-      <div className='flex px-5 justify-between py-3 bg-gray-700 items-center'>
-        <img src={Logo} alt='logo' className='w-8 h-8 m-0' />
-        <div className='flex flex-wrap items-stretch w-full relative mx-20'>
-          <input
-            type='search'
-            placeholder='Search'
-            name='search'
-            // ref={searchVal}
-            value={searchVal}
-            // className='p-2 rounded-lg w-1/2'
-            className='relative flex-auto bg-transparent border rounded-l border-r-0 border-solid focus:border-neutral-300 border-neutral-400 px-3 py-1.5 text-base transition duration-300 ease-in-out focus:text-neutral-200 focus:shadow-te-primary focus:outline-none text-neutral-400 placeholder:text-neutral-400'
-            onChange={(e) => setSearchVal(e.target.value)}
-          />
-          <button
-            className={`relative border px-3 py-2.5 text-neutral-300 hover:text-neutral-200 rounded-r border-neutral-400 hover:border-neutral-300 bg-amber-900 transition duration-300 ease-in-out w-11 fa-solid ${
-              searchVal.length < 1 ? 'fa-magnifying-glass' : 'fa-xmark'
-            }`}
-            onClick={() => setSearchVal('')}
-          />
-        </div>
-        <div className='py-2 px-3'>🛒</div>
-      </div>
-    </nav>
-  );
+    function handleTheme() {
+        // const currTheme = document.documentElement.getAttribute('data-theme');
+        // console.log(localStorage.getItem("theme"))
+        const currTheme: string = localStorage.getItem("theme") || "light";
+        console.log(currTheme)
+        if (currTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+        else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
+        // console.log(document.documentElement.getAttribute('data-theme'), currTheme)
+    }
+
+
+    return (
+        <nav>
+            <div className='flex px-5 justify-between py-3 border-box border-b-2 border-b-[var(--primary)] items-center'>
+
+                <img src={Logo} alt='logo' className='w-8 h-8 m-0' />
+                <div className='flex flex-wrap justify-between items-stretch w-full 
+                relative mx-20 border border-[var(--primary)] 
+                rounded-lg'>
+                    <input
+                        type='search'
+                        placeholder='Search'
+                        name='search'
+                        // ref={searchVal}
+                        value={searchVal}
+                        // className='p-2 rounded-lg w-1/2'
+                        className='bg-transparent px-3 py-1.5 text-base transition duration-300 ease-in-out focus:border focus:border-[var(--accent)] w-full focus:shadow-te-primary focus:outline-none placeholder:text-[var(--primary)]'
+                        onChange={(e) => setSearchVal(e.target.value)}
+                    />
+                </div>
+                <div
+                    className="flex cursor-pointer"
+                    onClick={() => { handleTheme() }}
+                >
+                    <FontAwesomeIcon
+                        icon={faCircleHalfStroke}
+                        size='xl'
+                    />
+                    <span className='mx-2'>theme</span>
+                </div>
+                <div className='flex justify-between py-2 px-3 cursor-pointer bg-[var(--primary)]'>
+                    <FontAwesomeIcon
+                        icon={faCartShopping}
+                        size='xl'
+                    />
+                    <span className='mx-2'>cart</span>
+                </div>
+            </div>
+        </nav>
+    );
 }
