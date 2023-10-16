@@ -18,19 +18,21 @@
     -webkit-text-size-adjust: 100%;
     text-transform: capitalize;
 
-    --text: #10100e;
-    --background: #f5f6f4;
-    --primary: #b0b8ad;
-    --secondary: #d5d3d9;
-    --accent: #746878;
+    --text: #0c1810;
+    --background: #ebf5ef;
+    --primary: #44837a;
+    /* --secondary: #ebf2f5; */
+    --secondary: #8b99a1;
+    --accent: #6495af;
+
 }
-:root[data-theme="dark"] {
-    --text: #f1f1ef;
-    --background: #0a0b09;
-    --primary: #4a5247;
-    --secondary: #28262c;
-    --accent: #938797;
-}
+/* :root[data-theme="dark"] { */
+/*     --text: #f1f1ef; */
+/*     --background: #0a0b09; */
+/*     --primary: #4a5247; */
+/*     --secondary: #28262c; */
+/*     --accent: #938797; */
+/* } */
 /* :root[data-theme="dark"] { */
 /*     --text: #efe1f9; */
 /*     --background: #0b0311; */

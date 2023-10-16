@@ -11,12 +11,14 @@ export default function Products() {
 
     return (
         <div
-            className='grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-4 
-        lg:grid-cols-3 md:grid-cols-2 gap-4 lg:ms-8 justify-items-center'>
+            //className='grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-4 
+            //lg:grid-cols-3 md:grid-cols-2 gap-4 lg:ms-8 justify-items-center'>
+            className='flex flex-wrap mx-auto justify-evenly'
+        >
             {filteredProducts.length >= 1 &&
                 filteredProducts.map((item: ProductType) => {
                     return (
-                        <div key={item._id}>
+                        <div className='m-5' key={item._id}>
                             <ProductCard product={item} />
                         </div>
                     );
