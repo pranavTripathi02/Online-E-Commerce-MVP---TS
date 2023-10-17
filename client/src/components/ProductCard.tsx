@@ -9,12 +9,13 @@ export default function ProductCard({ product }: { product: ProductType }) {
     const dispatch = useDispatch();
 
     const handleAddToCart = (product: ProductType) => {
-        console.log("adding to cart", product);
+        // console.log("adding to cart", product);
         const productInfo: CartProductType = {
-            _id: product._id,
             title: product.title,
+            selling_price: product.selling_price,
             image_links: product.image_links,
             mrp: product.mrp,
+            _id: product._id,
             quantity: 1
 
         }
@@ -45,7 +46,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
             </div>
             <div className="absolute flex bottom-2 w-full justify-center p-2">
                 <button
-                    className="border p-2 rounded-lg hover:bg-[var(--accent)]"
+                    className="border p-2 rounded-lg hover:bg-[var(--accent)] disabled:invert"
                     onClick={() => handleAddToCart(product)}
                 >
                     <FontAwesomeIcon

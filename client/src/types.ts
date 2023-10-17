@@ -17,6 +17,7 @@ export interface ProductType {
 
 export interface CartProductType {
     title: string;
+    selling_price: string;
     image_links: string;
     mrp: string;
     _id: string;

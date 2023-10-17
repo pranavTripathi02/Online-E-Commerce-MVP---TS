@@ -28,12 +28,35 @@ const cartSlice = createSlice({
             return [...state, action.payload.productInfo];
         },
         removeFromCart: (state, action) => {
+            const { productInfo } = action.payload;
+            return state.filter(item =>
+                item._id !== productInfo._id
+            )
+
         },
         decreaseQuantity: (state, action) => {
+            const { productInfo } = action.payload;
+            if (productInfo.quantity === 1) {
+                return state.filter(item =>
+                    item._id !== productInfo._id
+                )
+            }
+            else {
+                state.find(item => {
+                    if (item._id === productInfo._id) {
+                        item.quantity -= 1;
+                    }
+                })
+            }
         },
         increaseQuantity: (state, action) => {
-            const { product } = action.payload;
-
+            const { productInfo } = action.payload;
+            // console.log(productInfo);
+            state.find(item => {
+                if (item._id === productInfo._id) {
+                    item.quantity += 1;
+                }
+            })
         }
     }
 })

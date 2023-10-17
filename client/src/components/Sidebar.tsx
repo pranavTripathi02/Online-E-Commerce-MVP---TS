@@ -16,7 +16,7 @@ export default function Sidebar() {
     }, [stars, maxPrice, minPrice]);
 
     return (
-        <div className='my-5 mx-2 h-1/2 w-1/6 bg-transparent float-left hidden lg:flex flex-col text-center'>
+        <div className='my-5 mx-2 h-1/2 md:w-1/6 bg-transparent float-left hidden lg:flex flex-col text-center'>
             <div className='p-2 pl-4 bg-transparent shadow-md border border-[var(--secondary)] text-left'>
                 <h5>Avg. Reviews</h5>
                 <ul className='m-auto text-yellow-500 cursor-pointer'>
